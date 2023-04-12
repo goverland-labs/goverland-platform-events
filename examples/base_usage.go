@@ -14,7 +14,12 @@ import (
 )
 
 func main() {
-	conn, err := nats.Connect(nats.DefaultURL)
+	conn, err := nats.Connect(
+		nats.DefaultURL,
+		nats.RetryOnFailedConnect(true),
+		nats.MaxReconnects(10),
+		nats.ReconnectWait(time.Second),
+	)
 	if err != nil {
 		log.Fatal("connect:", err)
 	}
@@ -35,16 +40,14 @@ func main() {
 		}
 	}()
 
-	handler := func() events.ProposalCreateHandler {
-		return func(payload events.ProposalPayload) error {
-			fmt.Printf("message from nats: %s / %s \n", payload.ID, payload.Title)
+	var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+		fmt.Printf("message from nats: %s / %s \n", payload.ID, payload.Title)
 
-			return nil
-		}
+		return nil
 	}
 
 	group := "example"
-	con, err := natsclient.NewConsumer(context.Background(), conn, group, subject, handler())
+	con, err := natsclient.NewConsumer(context.Background(), conn, group, subject, handler)
 	if err != nil {
 		log.Fatal("new consumer:", err)
 	}

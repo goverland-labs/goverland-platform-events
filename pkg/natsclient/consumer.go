@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/nats-io/nats.go"
+	"github.com/rs/zerolog/log"
 
 	"github.com/goverland-labs/platform-events/events"
 )
@@ -53,15 +54,13 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 			// todo: think about nak with delay and timeouts
 			err = msg.Nak()
 			if err != nil {
-				// fixme: put it to the error chan
-				fmt.Println("nack error: ", msg.Data, err)
+				log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
 				return
 			}
 		}
 
 		if err := msg.Ack(); err != nil {
-			// fixme: put it to the error chan
-			fmt.Println("ack error: ", msg.Data, err)
+			log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
 			return
 		}
 	}, nats.ManualAck(), nats.DeliverNew(), nats.Context(ctx))
