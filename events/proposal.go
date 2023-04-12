@@ -2,6 +2,11 @@ package events
 
 import "encoding/json"
 
+const (
+	SubjectProposalCreated = "proposal.created"
+	SubjectProposalUpdated = "proposal.updated"
+)
+
 type (
 	SpacePayload struct {
 		ID   string `json:"id"`

@@ -25,7 +25,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	subject := "test.events"
+	subject := events.SubjectProposalCreated
 	pr, err := natsclient.NewProducer(conn, subject)
 	if err != nil {
 		log.Fatal("new producer:", err)

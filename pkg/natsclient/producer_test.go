@@ -2,24 +2,10 @@ package natsclient
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
-	"github.com/nats-io/nats-server/v2/server"
-	natsserver "github.com/nats-io/nats-server/v2/test"
-	"github.com/nats-io/nats.go"
 	"github.com/stretchr/testify/require"
 )
-
-const testPort = 8369
-
-func RunNatsServer(port int) *server.Server {
-	opts := natsserver.DefaultTestOptions
-	opts.Port = port
-	opts.JetStream = true
-
-	return natsserver.RunServer(&opts)
-}
 
 func TestUnitNewProducer(t *testing.T) {
 	for name, tc := range map[string]struct {
@@ -40,13 +26,12 @@ func TestUnitNewProducer(t *testing.T) {
 		},
 	} {
 		t.Run(name, func(t *testing.T) {
-			s := RunNatsServer(testPort)
-			defer s.Shutdown()
-
-			sUrl := fmt.Sprintf("nats://127.0.0.1:%d", testPort)
-			nc, err := nats.Connect(sUrl)
+			s, nc, err := runNatsServer(testPort)
 			require.NoError(t, err)
-			defer nc.Close()
+			defer func() {
+				s.Shutdown()
+				nc.Close()
+			}()
 
 			_, err = NewProducer(nc, tc.subject)
 			if tc.err == nil {
@@ -58,13 +43,12 @@ func TestUnitNewProducer(t *testing.T) {
 	}
 
 	t.Run("allow few producers with same subject", func(t *testing.T) {
-		s := RunNatsServer(testPort)
-		defer s.Shutdown()
-
-		sUrl := fmt.Sprintf("nats://127.0.0.1:%d", testPort)
-		nc, err := nats.Connect(sUrl)
+		s, nc, err := runNatsServer(testPort)
 		require.NoError(t, err)
-		defer nc.Close()
+		defer func() {
+			s.Shutdown()
+			nc.Close()
+		}()
 
 		subject := "test.subject"
 		_, err = NewProducer(nc, subject)
@@ -77,13 +61,12 @@ func TestUnitNewProducer(t *testing.T) {
 }
 
 func TestUnitPublish(t *testing.T) {
-	s := RunNatsServer(testPort)
-	defer s.Shutdown()
-
-	sUrl := fmt.Sprintf("nats://127.0.0.1:%d", testPort)
-	nc, err := nats.Connect(sUrl)
+	s, nc, err := runNatsServer(testPort)
 	require.NoError(t, err)
-	defer nc.Close()
+	defer func() {
+		s.Shutdown()
+		nc.Close()
+	}()
 
 	subject := "test.subject"
 	pr, err := NewProducer(nc, subject)
