@@ -40,7 +40,7 @@ func main() {
 		}
 	}()
 
-	var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+	var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
 		fmt.Printf("message from nats: %s / %s \n", payload.ID, payload.Title)
 
 		return nil

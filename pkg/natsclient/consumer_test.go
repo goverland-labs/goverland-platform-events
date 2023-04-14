@@ -57,7 +57,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		}()
 
 		cnt := 0
-		var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
 			cnt++
 			return nil
 		}
@@ -87,7 +87,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		}()
 
 		var cnt int64 = 0
-		var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			return nil
 		}
@@ -120,7 +120,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		}()
 
 		var cnt int64 = 0
-		var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			return nil
 		}
@@ -167,7 +167,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		<-time.After(time.Millisecond * 100)
 
 		var cnt int64 = 0
-		var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			return nil
 		}
@@ -194,9 +194,9 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		subject := "consume.msg.error.handler"
 		var cnt int64 = 0
-		var handler events.ProposalCreateHandler = func(payload events.ProposalPayload) error {
+		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
-			if cnt < 2 {
+			if cnt < 3 {
 				return errors.New("unexpected error")
 			}
 
