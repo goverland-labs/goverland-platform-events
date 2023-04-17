@@ -15,17 +15,15 @@ var (
 	ErrGroupRequired = errors.New("group is required")
 )
 
-type (
-	EventHandler interface {
-		RawHandler() events.RawMessageHandler
-	}
+type EventHandler interface {
+	RawHandler() events.RawMessageHandler
+}
 
-	Consumer struct {
-		sub     *nats.Subscription
-		group   string
-		subject string
-	}
-)
+type Consumer struct {
+	sub     *nats.Subscription
+	group   string
+	subject string
+}
 
 // NewConsumer creates nats QueueSubscribe with custom handler
 // Group must be the name of service or package: core, feed, etc. It's allow handle messages in few consumers.
