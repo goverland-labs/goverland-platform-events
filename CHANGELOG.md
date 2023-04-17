@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+
+## [0.0.1] - 2023-04-17
+
 ### Added
 - Basic events
 - Add layer for message manipulation in the nats jet stream
