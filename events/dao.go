@@ -3,8 +3,8 @@ package events
 import "encoding/json"
 
 const (
-	SubjectSpaceCreated = "space.created"
-	SubjectSpaceUpdated = "space.updated"
+	SubjectDaoCreated = "dao.created"
+	SubjectDaoUpdated = "dao.updated"
 )
 
 type VoitingPayload struct {
