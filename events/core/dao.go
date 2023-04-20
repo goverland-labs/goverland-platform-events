@@ -1,13 +1,17 @@
-package events
+package aggregator
 
-import "encoding/json"
+import (
+	"encoding/json"
 
-const (
-	SubjectDaoCreated = "dao.created"
-	SubjectDaoUpdated = "dao.updated"
+	"github.com/goverland-labs/platform-events/events"
 )
 
-type VoitingPayload struct {
+const (
+	SubjectDaoCreated = "core.dao.created"
+	SubjectDaoUpdated = "core.dao.updated"
+)
+
+type VotingPayload struct {
 	Delay       int     `json:"delay"`
 	Period      int     `json:"period"`
 	Type        string  `json:"type"`
@@ -39,12 +43,8 @@ type DaoPayload struct {
 	Admins         []string          `json:"admins"`
 	Members        []string          `json:"members"`
 	Moderators     []string          `json:"moderators"`
-	Filters        []FilterPayload   `json:"filters"`
-	Plugins        interface{}       `json:"plugins"`
-	Voting         VoitingPayload    `json:"voting"`
+	Voting         VotingPayload     `json:"voting"`
 	Categories     []string          `json:"categories"`
-	Validation     ValidationPayload `json:"validation"`
-	VoteValidation ValidationPayload `json:"vote_validation"`
 	Treasures      []TreasuryPayload `json:"treasures"`
 	FollowersCount int               `json:"followers_count"`
 	ProposalsCount int               `json:"proposals_count"`
@@ -55,7 +55,7 @@ type DaoPayload struct {
 
 type DaoHandler func(payload DaoPayload) error
 
-func (h DaoHandler) RawHandler() RawMessageHandler {
+func (h DaoHandler) RawHandler() events.RawMessageHandler {
 	return func(raw []byte) error {
 		var d DaoPayload
 		if err := json.Unmarshal(raw, &d); err != nil {

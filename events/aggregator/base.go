@@ -1,4 +1,4 @@
-package events
+package aggregator
 
 type FilterPayload struct {
 	MinScore    float32 `json:"min_score"`
@@ -20,5 +20,3 @@ type StrategyPayload struct {
 	Name    string `json:"name"`
 	Network string `json:"network"`
 }
-
-type RawMessageHandler func([]byte) error

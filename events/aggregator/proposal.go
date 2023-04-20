@@ -1,10 +1,14 @@
-package events
+package aggregator
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/goverland-labs/platform-events/events"
+)
 
 const (
-	SubjectProposalCreated = "proposal.created"
-	SubjectProposalUpdated = "proposal.updated"
+	SubjectProposalCreated = "aggregator.proposal.created"
+	SubjectProposalUpdated = "aggregator.proposal.updated"
 )
 
 type ProposalPayload struct {
@@ -41,7 +45,7 @@ type ProposalPayload struct {
 
 type ProposalHandler func(ProposalPayload) error
 
-func (h ProposalHandler) RawHandler() RawMessageHandler {
+func (h ProposalHandler) RawHandler() events.RawMessageHandler {
 	return func(raw []byte) error {
 		var d ProposalPayload
 		if err := json.Unmarshal(raw, &d); err != nil {
