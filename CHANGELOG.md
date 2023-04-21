@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- Split core and aggregator events
+
 
 ## [0.0.1] - 2023-04-17
 

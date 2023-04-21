@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/goverland-labs/platform-events/events"
+	"github.com/goverland-labs/platform-events/events/aggregator"
 )
 
 func TestUnitNewConsumer(t *testing.T) {
@@ -57,7 +57,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		}()
 
 		cnt := 0
-		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
+		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
 			cnt++
 			return nil
 		}
@@ -71,7 +71,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		msgs := 5
 		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 		}
 
 		<-time.After(time.Millisecond * 100)
@@ -87,7 +87,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		}()
 
 		var cnt int64 = 0
-		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
+		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			return nil
 		}
@@ -104,7 +104,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		msgs := 500
 		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 		}
 
 		<-time.After(time.Millisecond * 100)
@@ -120,7 +120,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		}()
 
 		var cnt int64 = 0
-		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
+		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			return nil
 		}
@@ -137,7 +137,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		msgs := 500
 		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 		}
 
 		<-time.After(time.Millisecond * 100)
@@ -157,17 +157,17 @@ func TestUnitConsumeMsg(t *testing.T) {
 		require.NoError(t, err)
 		msgs := 500
 		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 		}
 
 		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 		}
 
 		<-time.After(time.Millisecond * 100)
 
 		var cnt int64 = 0
-		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
+		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			return nil
 		}
@@ -177,7 +177,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 		require.NoError(t, err)
 
 		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 		}
 
 		<-time.After(time.Millisecond * 100)
@@ -194,7 +194,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		subject := "consume.msg.error.handler"
 		var cnt int64 = 0
-		var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
+		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
 			atomic.AddInt64(&cnt, 1)
 			if cnt < 3 {
 				return errors.New("unexpected error")
@@ -209,7 +209,7 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		pl, err := NewProducer(nc, subject)
 		require.NoError(t, err)
-		_ = pl.PublishJSON(context.Background(), &events.ProposalPayload{ID: "id-1"})
+		_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
 
 		<-time.After(time.Millisecond * 100)
 

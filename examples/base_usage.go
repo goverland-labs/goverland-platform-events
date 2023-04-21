@@ -9,7 +9,7 @@ import (
 
 	"github.com/nats-io/nats.go"
 
-	"github.com/goverland-labs/platform-events/events"
+	"github.com/goverland-labs/platform-events/events/aggregator"
 	"github.com/goverland-labs/platform-events/pkg/natsclient"
 )
 
@@ -25,7 +25,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	subject := events.SubjectProposalCreated
+	subject := aggregator.SubjectProposalCreated
 	pr, err := natsclient.NewProducer(conn, subject)
 	if err != nil {
 		log.Fatal("new producer:", err)
@@ -33,14 +33,14 @@ func main() {
 
 	go func() {
 		for i := 0; i < 5; i++ {
-			pl := events.ProposalPayload{ID: fmt.Sprintf("id-%d", i), Title: fmt.Sprintf("title #%d", i*10)}
+			pl := aggregator.ProposalPayload{ID: fmt.Sprintf("id-%d", i), Title: fmt.Sprintf("title #%d", i*10)}
 			if err = pr.PublishJSON(context.Background(), pl); err != nil {
 				log.Fatal("publish:", err)
 			}
 		}
 	}()
 
-	var handler events.ProposalHandler = func(payload events.ProposalPayload) error {
+	var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
 		fmt.Printf("message from nats: %s / %s \n", payload.ID, payload.Title)
 
 		return nil
