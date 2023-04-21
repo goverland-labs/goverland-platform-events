@@ -15,12 +15,10 @@ var (
 	ErrInvalidChars    = errors.New("subject contains spaces")
 )
 
-type (
-	Producer struct {
-		js      nats.JetStreamContext
-		subject string
-	}
-)
+type Producer struct {
+	js      nats.JetStreamContext
+	subject string
+}
 
 // NewProducer ...
 // fixme: add description
