@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Core proposal event
+
 ## [0.0.2] - 2023-04-21
 
 ### Changed

@@ -25,7 +25,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	subject := aggregator.SubjectProposalCreated
+	subject := aggregator.SubjectDaoCreated
 	pr, err := natsclient.NewProducer(conn, subject)
 	if err != nil {
 		log.Fatal("new producer:", err)
