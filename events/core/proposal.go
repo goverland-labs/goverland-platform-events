@@ -7,8 +7,14 @@ import (
 )
 
 const (
-	SubjectProposalCreated = "core.proposal.created"
-	SubjectProposalUpdated = "core.proposal.updated"
+	SubjectProposalCreated      = "core.proposal.created"
+	SubjectProposalUpdated      = "core.proposal.updated"
+	SubjectProposalUpdatedState = "core.proposal.updated.state"
+
+	SubjectProposalVotingStarted = "core.proposal.voting.started"
+	SubjectProposalVotingEnded   = "core.proposal.voting.ended"
+	SubjectProposalVotingReached = "core.proposal.voting.reached"
+	SubjectProposalVotingComing  = "core.proposal.voting.coming"
 )
 
 type ProposalPayload struct {
