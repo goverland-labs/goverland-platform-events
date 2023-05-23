@@ -1,4 +1,4 @@
-package aggregator
+package core
 
 type TreasuryPayload struct {
 	Name    string `json:"name"`
