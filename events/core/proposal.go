@@ -11,10 +11,10 @@ const (
 	SubjectProposalUpdated      = "core.proposal.updated"
 	SubjectProposalUpdatedState = "core.proposal.updated.state"
 
-	SubjectProposalVotingStarted = "core.proposal.voting.started"
-	SubjectProposalVotingEnded   = "core.proposal.voting.ended"
-	SubjectProposalVotingReached = "core.proposal.voting.reached"
-	SubjectProposalVotingComing  = "core.proposal.voting.coming"
+	SubjectProposalVotingStarted       = "core.proposal.voting.started"
+	SubjectProposalVotingEnded         = "core.proposal.voting.ended"
+	SubjectProposalVotingQuorumReached = "core.proposal.voting.quorum_reached"
+	SubjectProposalVotingStartsSoon    = "core.proposal.voting.starts_soon"
 )
 
 type ProposalPayload struct {
