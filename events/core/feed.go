@@ -9,13 +9,13 @@ import (
 type Action string
 
 const (
-	ActionCreated       Action = "created"
-	ActionUpdated              = "updated"
-	ActionUpdatedState         = "updated.state"
-	ActionVotingStarted        = "voting.started"
-	ActionVotingEnded          = "voting.ended"
-	ActionVotingReached        = "voting.reached"
-	ActionVotingComing         = "voting.coming"
+	ActionCreated             Action = "created"
+	ActionUpdated                    = "updated"
+	ActionUpdatedState               = "updated.state"
+	ActionVotingStarted              = "voting.started"
+	ActionVotingEnded                = "voting.ended"
+	ActionVotingQuorumReached        = "voting.quorum_reached"
+	ActionVotingStartsSoon           = "voting.starts_soon"
 )
 
 func ConvertActionToExternal(action string) Action {
@@ -28,10 +28,10 @@ func ConvertActionToExternal(action string) Action {
 		return ActionUpdatedState
 	case SubjectProposalVotingStarted:
 		return ActionVotingStarted
-	case SubjectProposalVotingComing:
-		return ActionVotingComing
-	case SubjectProposalVotingReached:
-		return ActionVotingReached
+	case SubjectProposalVotingStartsSoon:
+		return ActionVotingStartsSoon
+	case SubjectProposalVotingQuorumReached:
+		return ActionVotingQuorumReached
 	case SubjectProposalVotingEnded:
 		return ActionVotingEnded
 	default:
