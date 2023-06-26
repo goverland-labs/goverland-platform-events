@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.0.8] - 2023-06-26
+
 ### Added
 - Inbox dao event
 - Inbox proposal event
