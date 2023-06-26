@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Inbox dao event
+- Inbox proposal event
+- Add natsclient publisher
+
 ## [0.0.7] - 2023-06-07
 
 ### Added
