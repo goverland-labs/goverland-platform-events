@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Added strategy.params field definition
+
 ## [0.0.8] - 2023-06-26
 
 ### Added

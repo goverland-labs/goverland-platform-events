@@ -6,8 +6,8 @@ type FilterPayload struct {
 }
 
 type ValidationPayload struct {
-	Name   string      `json:"name"`
-	Params interface{} `json:"params"`
+	Name   string                 `json:"name"`
+	Params map[string]interface{} `json:"params"`
 }
 
 type TreasuryPayload struct {
@@ -17,6 +17,7 @@ type TreasuryPayload struct {
 }
 
 type StrategyPayload struct {
-	Name    string `json:"name"`
-	Network string `json:"network"`
+	Name    string                 `json:"name"`
+	Network string                 `json:"network"`
+	Params  map[string]interface{} `json:"params"`
 }
