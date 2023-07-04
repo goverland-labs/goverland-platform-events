@@ -7,8 +7,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.0.10] - 2023-07-04
+
 ### Added
 - Added strategy.params field definition
+
+## [0.0.9] - 2023-06-27
+
+### Added
+- Added events for inbox
 
 ## [0.0.8] - 2023-06-26
 
