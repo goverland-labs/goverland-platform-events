@@ -61,7 +61,7 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 			log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
 			return
 		}
-	}, nats.ManualAck(), nats.DeliverNew(), nats.Context(ctx))
+	}, nats.ManualAck(), nats.DeliverAll(), nats.Context(ctx))
 	if err != nil {
 		return nil, fmt.Errorf("queue subscriibe: %w", err)
 	}
