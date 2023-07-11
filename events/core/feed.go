@@ -10,12 +10,12 @@ type Action string
 
 const (
 	ActionCreated             Action = "created"
-	ActionUpdated                    = "updated"
-	ActionUpdatedState               = "updated.state"
-	ActionVotingStarted              = "voting.started"
-	ActionVotingEnded                = "voting.ended"
-	ActionVotingQuorumReached        = "voting.quorum_reached"
-	ActionVotingStartsSoon           = "voting.starts_soon"
+	ActionUpdated             Action = "updated"
+	ActionUpdatedState        Action = "updated.state"
+	ActionVotingStarted       Action = "voting.started"
+	ActionVotingEnded         Action = "voting.ended"
+	ActionVotingQuorumReached Action = "voting.quorum_reached"
+	ActionVotingStartsSoon    Action = "voting.starts_soon"
 )
 
 func ConvertActionToExternal(action string) Action {

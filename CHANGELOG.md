@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Fixed linter warnings
+
 ## [0.0.10] - 2023-07-04
 
 ### Added
