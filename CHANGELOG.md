@@ -7,9 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.0.11] - 2023-07-04
+
 ### Fixed
 - Fixed linter warnings
-- Fixed delivery options for nats consumer
+- Fixed delivery options for nats consumer and removed unnecessary test
 
 ## [0.0.10] - 2023-07-04
 
