@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Fixed missed alias field in the DAO object
+- Fixed missed field params in the Strategy object 
+
 ## [0.0.11] - 2023-07-04
 
 ### Fixed

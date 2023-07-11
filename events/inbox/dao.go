@@ -24,6 +24,7 @@ type VotingPayload struct {
 
 type DaoPayload struct {
 	ID             string            `json:"id"`
+	Alias          string            `json:"alias"`
 	Name           string            `json:"name"`
 	Private        bool              `json:"private"`
 	About          string            `json:"about"`

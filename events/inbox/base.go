@@ -7,6 +7,7 @@ type TreasuryPayload struct {
 }
 
 type StrategyPayload struct {
-	Name    string `json:"name"`
-	Network string `json:"network"`
+	Name    string                 `json:"name"`
+	Network string                 `json:"network"`
+	Params  map[string]interface{} `json:"params"`
 }
