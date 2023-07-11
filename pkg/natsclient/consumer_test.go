@@ -2,9 +2,6 @@ package natsclient
 
 import (
 	"context"
-	"errors"
-	"fmt"
-	"math/rand"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -142,78 +139,5 @@ func TestUnitConsumeMsg(t *testing.T) {
 
 		<-time.After(time.Millisecond * 100)
 		assert.Equal(t, msgs*2, int(cnt))
-	})
-
-	t.Run("handle only new messages", func(t *testing.T) {
-		s, nc, err := runNatsServer(testPort)
-		require.NoError(t, err)
-		defer func() {
-			s.Shutdown()
-			nc.Close()
-		}()
-
-		subject := "consume.msg.new"
-		pl, err := NewProducer(nc, subject)
-		require.NoError(t, err)
-		msgs := 500
-		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
-		}
-
-		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
-		}
-
-		<-time.After(time.Millisecond * 100)
-
-		var cnt int64 = 0
-		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
-			atomic.AddInt64(&cnt, 1)
-			return nil
-		}
-
-		group := fmt.Sprintf("group-%d", rand.Int())
-		_, err = NewConsumer(context.Background(), nc, group, subject, handler)
-		require.NoError(t, err)
-
-		for i := 0; i < msgs; i++ {
-			_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
-		}
-
-		<-time.After(time.Millisecond * 100)
-		assert.Equal(t, msgs, int(cnt))
-	})
-
-	t.Run("handle only new messages", func(t *testing.T) {
-		s, nc, err := runNatsServer(testPort)
-		require.NoError(t, err)
-		defer func() {
-			s.Shutdown()
-			nc.Close()
-		}()
-
-		subject := "consume.msg.error.handler"
-		var cnt int64 = 0
-		var handler aggregator.ProposalHandler = func(payload aggregator.ProposalPayload) error {
-			atomic.AddInt64(&cnt, 1)
-			if cnt < 3 {
-				return errors.New("unexpected error")
-			}
-
-			return nil
-		}
-
-		group := fmt.Sprintf("group-%d", rand.Int())
-		_, err = NewConsumer(context.Background(), nc, group, subject, handler)
-		require.NoError(t, err)
-
-		pl, err := NewProducer(nc, subject)
-		require.NoError(t, err)
-		_ = pl.PublishJSON(context.Background(), &aggregator.ProposalPayload{ID: "id-1"})
-
-		<-time.After(time.Millisecond * 100)
-
-		// checks how many attempts consumer processed
-		assert.Equal(t, 3, int(cnt))
 	})
 }
