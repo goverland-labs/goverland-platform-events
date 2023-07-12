@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.0.13] - 2023-07-12
+
 ### Changed
 - Changed default AckWait for all consumers to 1 minute 
 
