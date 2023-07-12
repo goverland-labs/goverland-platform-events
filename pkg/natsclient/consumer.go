@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/nats-io/nats.go"
 	"github.com/rs/zerolog/log"
@@ -61,7 +62,7 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 			log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
 			return
 		}
-	}, nats.ManualAck(), nats.DeliverAll(), nats.Context(ctx))
+	}, nats.ManualAck(), nats.DeliverAll(), nats.Context(ctx), nats.AckWait(time.Minute))
 	if err != nil {
 		return nil, fmt.Errorf("queue subscriibe: %w", err)
 	}
