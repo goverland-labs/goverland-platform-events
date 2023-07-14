@@ -3,6 +3,8 @@ package inbox
 import (
 	"encoding/json"
 
+	"github.com/google/uuid"
+
 	"github.com/goverland-labs/platform-events/events"
 )
 
@@ -22,7 +24,7 @@ type ProposalPayload struct {
 	Ipfs          string            `json:"ipfs"`
 	Author        string            `json:"author"`
 	Created       int               `json:"created"`
-	DaoID         string            `json:"dao_id"`
+	DaoID         uuid.UUID         `json:"dao_id"`
 	Network       string            `json:"network"`
 	Symbol        string            `json:"symbol"`
 	Type          string            `json:"type"`

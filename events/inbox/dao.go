@@ -3,6 +3,8 @@ package inbox
 import (
 	"encoding/json"
 
+	"github.com/google/uuid"
+
 	"github.com/goverland-labs/platform-events/events"
 )
 
@@ -23,7 +25,7 @@ type VotingPayload struct {
 }
 
 type DaoPayload struct {
-	ID             string            `json:"id"`
+	ID             uuid.UUID         `json:"id"`
 	Alias          string            `json:"alias"`
 	Name           string            `json:"name"`
 	Private        bool              `json:"private"`
@@ -51,7 +53,7 @@ type DaoPayload struct {
 	ProposalsCount int               `json:"proposals_count"`
 	Guidelines     string            `json:"guidelines"`
 	Template       string            `json:"template"`
-	ParentID       string            `json:"parent_id"`
+	ParentID       *uuid.UUID        `json:"parent_id,omitempty"`
 }
 
 type DaoHandler func(payload DaoPayload) error

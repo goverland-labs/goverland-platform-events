@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 type Action string
@@ -12,32 +15,20 @@ const (
 	ActionCreated             Action = "created"
 	ActionUpdated             Action = "updated"
 	ActionUpdatedState        Action = "updated.state"
-	ActionVotingStarted       Action = "voting.started"
-	ActionVotingEnded         Action = "voting.ended"
-	ActionVotingQuorumReached Action = "voting.quorum_reached"
 	ActionVotingStartsSoon    Action = "voting.starts_soon"
-)
+	ActionVotingStarted       Action = "voting.started"
+	ActionVotingQuorumReached Action = "voting.quorum_reached"
+	ActionVotingEnded         Action = "voting.ended"
 
-func ConvertActionToExternal(action string) Action {
-	switch action {
-	case SubjectDaoCreated, SubjectProposalCreated:
-		return ActionCreated
-	case SubjectDaoUpdated, SubjectProposalUpdated:
-		return ActionUpdated
-	case SubjectProposalUpdatedState:
-		return ActionUpdatedState
-	case SubjectProposalVotingStarted:
-		return ActionVotingStarted
-	case SubjectProposalVotingStartsSoon:
-		return ActionVotingStartsSoon
-	case SubjectProposalVotingQuorumReached:
-		return ActionVotingQuorumReached
-	case SubjectProposalVotingEnded:
-		return ActionVotingEnded
-	default:
-		return ""
-	}
-}
+	DaoCreated                  TimelineAction = "dao.created"
+	DaoUpdated                  TimelineAction = "dao.updated"
+	ProposalCreated             TimelineAction = "proposal.created"
+	ProposalUpdated             TimelineAction = "proposal.updated"
+	ProposalVotingStartsSoon    TimelineAction = "proposal.voting.starts_soon"
+	ProposalVotingStarted       TimelineAction = "proposal.voting.started"
+	ProposalVotingQuorumReached TimelineAction = "proposal.voting.quorum_reached"
+	ProposalVotingEnded         TimelineAction = "proposal.voting.ended"
+)
 
 type Type string
 
@@ -47,16 +38,26 @@ const (
 )
 
 type FeedItem struct {
-	DaoID        string `json:"dao_id"`
-	ProposalID   string `json:"proposal_id"`
-	DiscussionID string `json:"discussion_id"`
-	Type         Type   `json:"type"`
-	Action       Action `json:"action"`
+	ID           uuid.UUID `json:"id"`
+	DaoID        uuid.UUID `json:"dao_id"`
+	ProposalID   string    `json:"proposal_id"`
+	DiscussionID string    `json:"discussion_id"`
+	Type         Type      `json:"type"`
+	Action       Action    `json:"action"`
 
 	Snapshot json.RawMessage `json:"snapshot"`
+	Timeline []TimelineItem  `json:"timeline"`
 }
 
+type TimelineItem struct {
+	CreatedAt time.Time      `json:"created_at"`
+	Action    TimelineAction `json:"action"`
+}
+
+type TimelineAction string
+
 // todo: refactor it
+
 func (f *FeedItem) GetDAO() (*DaoPayload, error) {
 	if f.Type != TypeDao {
 		return nil, errors.New("unsupported payload")
@@ -72,6 +73,7 @@ func (f *FeedItem) GetDAO() (*DaoPayload, error) {
 }
 
 // todo: refactor it
+
 func (f *FeedItem) GetProposal() (*ProposalPayload, error) {
 	if f.Type != TypeProposal {
 		return nil, errors.New("unsupported payload")
