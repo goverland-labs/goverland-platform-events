@@ -11,6 +11,8 @@ import (
 const (
 	SubjectDaoCreated = "core.dao.created"
 	SubjectDaoUpdated = "core.dao.updated"
+
+	SubjectCheckActivitySince = "core.dao.check.activity_since"
 )
 
 type VotingPayload struct {
@@ -54,6 +56,7 @@ type DaoPayload struct {
 	Guidelines     string            `json:"guidelines"`
 	Template       string            `json:"template"`
 	ParentID       *uuid.UUID        `json:"parent_id,omitempty"`
+	ActiveSince    *int              `json:"active_since,omitempty"`
 }
 
 type DaoHandler func(payload DaoPayload) error
