@@ -13,6 +13,10 @@ import (
 )
 
 const (
+	SubjectFeedUpdated = "inbox.feed.updated"
+)
+
+const (
 	DaoCreated                  TimelineAction = "dao.created"
 	DaoUpdated                  TimelineAction = "dao.updated"
 	ProposalCreated             TimelineAction = "proposal.created"
