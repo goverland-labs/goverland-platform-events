@@ -12,6 +12,8 @@ import (
 	"github.com/goverland-labs/platform-events/events"
 )
 
+const rateLimit = 3 * 8 * 1024 * 1024 // 3MiB TODO: Move it to options
+
 var (
 	ErrGroupRequired = errors.New("group is required")
 )
@@ -28,7 +30,13 @@ type Consumer struct {
 
 // NewConsumer creates nats QueueSubscribe with custom handler
 // Group must be the name of service or package: core, feed, etc. It's allow handle messages in few consumers.
-func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h EventHandler) (*Consumer, error) {
+func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h EventHandler, maxAckPending ...int) (*Consumer, error) {
+	// TODO: Passing MaxAckPending as an option
+	maxPending := 0
+	if len(maxAckPending) > 0 {
+		maxPending = maxAckPending[0]
+	}
+
 	if group == "" {
 		return nil, ErrGroupRequired
 	}
@@ -63,10 +71,23 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 			AckWait:        time.Minute,
 			DeliverSubject: group,
 			DeliverGroup:   group,
+			MaxAckPending:  maxPending,
+			RateLimit:      rateLimit,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("unable to create consumer '%s': %w", group, err)
 		}
+	}
+
+	opts := []nats.SubOpt{
+		nats.ManualAck(),
+		nats.DeliverAll(),
+		nats.Context(ctx),
+		nats.AckWait(time.Minute),
+	}
+
+	if maxPending > 0 {
+		opts = append(opts, nats.MaxAckPending(maxPending))
 	}
 
 	subscription, err := js.QueueSubscribe(subject, group, func(msg *nats.Msg) {
@@ -84,7 +105,7 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 			log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
 			return
 		}
-	}, nats.ManualAck(), nats.DeliverAll(), nats.Context(ctx), nats.AckWait(time.Minute))
+	}, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("queue subscriibe: %w", err)
 	}

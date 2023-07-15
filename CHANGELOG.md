@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Added parameter for max ack pending for consumer
+- Added hard coded rate limiting for consumer or 3MiB per second
+
 ## [0.0.18] - 2023-07-15
 
 ### Fixed
