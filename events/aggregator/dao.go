@@ -1,8 +1,6 @@
 package aggregator
 
 import (
-	"encoding/json"
-
 	"github.com/goverland-labs/platform-events/events"
 )
 
@@ -57,15 +55,4 @@ type DaoPayload struct {
 	ParentID       string            `json:"parent_id"`
 }
 
-type DaoHandler func(payload DaoPayload) error
-
-func (h DaoHandler) RawHandler() events.RawMessageHandler {
-	return func(raw []byte) error {
-		var d DaoPayload
-		if err := json.Unmarshal(raw, &d); err != nil {
-			return err
-		}
-
-		return h(d)
-	}
-}
+type DaoHandler = events.Handler[DaoPayload]

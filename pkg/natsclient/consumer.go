@@ -13,31 +13,55 @@ import (
 	"github.com/goverland-labs/platform-events/events"
 )
 
-const rateLimit = 1 * 8 * 1024 * 1024 // 3MiB TODO: Move it to options
-
-var (
-	ErrGroupRequired = errors.New("group is required")
+const (
+	KiB = 8 * 1024
+	MiB = KiB * 1024
+	GiB = MiB * 1024
 )
 
-type EventHandler interface {
-	RawHandler() events.RawMessageHandler
-}
+var ErrGroupRequired = errors.New("group is required")
 
-type Consumer struct {
+type Consumer[T any] struct {
 	sub     *nats.Subscription
 	group   string
 	subject string
 }
 
+type ConsumerOpt func(*nats.ConsumerConfig)
+
+func WithRateLimit(limit uint64) ConsumerOpt {
+	return func(cfg *nats.ConsumerConfig) {
+		cfg.RateLimit = limit
+	}
+}
+
+func WithMaxAckPending(count int) ConsumerOpt {
+	return func(cfg *nats.ConsumerConfig) {
+		cfg.MaxAckPending = count
+	}
+}
+
+func WithAckWait(wait time.Duration) ConsumerOpt {
+	return func(cfg *nats.ConsumerConfig) {
+		cfg.AckWait = wait
+	}
+}
+
+func WithDeliverPolicy(policy nats.DeliverPolicy) ConsumerOpt {
+	return func(cfg *nats.ConsumerConfig) {
+		cfg.DeliverPolicy = policy
+	}
+}
+
+func WithAckPolicy(policy nats.AckPolicy) ConsumerOpt {
+	return func(cfg *nats.ConsumerConfig) {
+		cfg.AckPolicy = policy
+	}
+}
+
 // NewConsumer creates nats QueueSubscribe with custom handler
 // Group must be the name of service or package: core, feed, etc. It's allow handle messages in few consumers.
-func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h EventHandler, maxAckPending ...int) (*Consumer, error) {
-	// TODO: Passing MaxAckPending as an option
-	maxPending := 0
-	if len(maxAckPending) > 0 {
-		maxPending = maxAckPending[0]
-	}
-
+func NewConsumer[T any](ctx context.Context, conn *nats.Conn, group, subject string, h events.Handler[T], opts ...ConsumerOpt) (*Consumer[T], error) {
 	if group == "" {
 		return nil, ErrGroupRequired
 	}
@@ -65,34 +89,39 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 		}
 	}
 
+	cfg := &nats.ConsumerConfig{
+		Durable:        consumerName,
+		Name:           consumerName,
+		DeliverPolicy:  nats.DeliverAllPolicy,
+		AckPolicy:      nats.AckExplicitPolicy,
+		DeliverSubject: fmt.Sprintf("deliver.%s", consumerName),
+		DeliverGroup:   group,
+		FilterSubject:  subject,
+	}
+
+	for _, opt := range opts {
+		opt(cfg)
+	}
+
 	if consumer == nil {
-		consumer, err = js.AddConsumer(stream.Config.Name, &nats.ConsumerConfig{
-			Durable:        consumerName,
-			Name:           consumerName,
-			DeliverPolicy:  nats.DeliverAllPolicy,
-			AckPolicy:      nats.AckExplicitPolicy,
-			AckWait:        time.Minute,
-			DeliverSubject: fmt.Sprintf("deliver.%s", consumerName),
-			DeliverGroup:   group,
-			FilterSubject:  subject,
-			MaxAckPending:  maxPending,
-			RateLimit:      rateLimit,
-		})
+		consumer, err = js.AddConsumer(stream.Config.Name, cfg)
 		if err != nil {
 			return nil, fmt.Errorf("unable to create consumer '%s': %w", group, err)
 		}
 	}
 
-	opts := []nats.SubOpt{
-		nats.Durable(consumerName),
+	// TODO: Think about updating consumer settings if it's different
+
+	subOpts := []nats.SubOpt{
+		nats.Durable(consumer.Name),
 		nats.ManualAck(),
 		nats.DeliverAll(),
 		nats.Context(ctx),
-		nats.AckWait(time.Minute),
+		nats.AckWait(cfg.AckWait),
 	}
 
-	if maxPending > 0 {
-		opts = append(opts, nats.MaxAckPending(maxPending))
+	if cfg.MaxAckPending > 0 {
+		subOpts = append(subOpts, nats.MaxAckPending(cfg.MaxAckPending))
 	}
 
 	subscription, err := js.QueueSubscribe(subject, group, func(msg *nats.Msg) {
@@ -110,19 +139,19 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 			log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
 			return
 		}
-	}, opts...)
+	}, subOpts...)
 	if err != nil {
 		return nil, fmt.Errorf("queue subscriibe: %w", err)
 	}
 
-	return &Consumer{
+	return &Consumer[T]{
 		sub:     subscription,
 		group:   group,
 		subject: subject,
 	}, nil
 }
 
-func (c *Consumer) Close() error {
+func (c *Consumer[T]) Close() error {
 	if err := c.sub.Drain(); err != nil {
 		return fmt.Errorf("drain [%s/%s]: %w", c.subject, c.group, err)
 	}

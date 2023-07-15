@@ -21,7 +21,7 @@ func TestUnitNewConsumer(t *testing.T) {
 			nc.Close()
 		}()
 
-		c, err := NewConsumer(context.Background(), nc, "group", "subject", nil)
+		c, err := NewConsumer[interface{}](context.Background(), nc, "group", "subject", nil)
 		require.NoError(t, err)
 		require.NotNil(t, c)
 	})
@@ -34,11 +34,11 @@ func TestUnitNewConsumer(t *testing.T) {
 			nc.Close()
 		}()
 
-		c1, err := NewConsumer(context.Background(), nc, "group", "subject", nil)
+		c1, err := NewConsumer[interface{}](context.Background(), nc, "group", "subject", nil)
 		require.NoError(t, err)
 		require.NotNil(t, c1)
 
-		c2, err := NewConsumer(context.Background(), nc, "group", "subject", nil)
+		c2, err := NewConsumer[interface{}](context.Background(), nc, "group", "subject", nil)
 		require.NoError(t, err)
 		require.NotNil(t, c2)
 	})

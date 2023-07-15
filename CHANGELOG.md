@@ -7,6 +7,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Added generic handler
+- Added options for creation new consumer
+
+### Changed
+- Total refactoring in inbox events
+
 ## [0.0.20] - 2023-07-15
 
 ### Fixed

@@ -15,15 +15,4 @@ type CallbackPayload struct {
 	Body       json.RawMessage `json:"body"`
 }
 
-type CallbackHandler func(payload CallbackPayload) error
-
-func (h CallbackHandler) RawHandler() events.RawMessageHandler {
-	return func(raw []byte) error {
-		var d CallbackPayload
-		if err := json.Unmarshal(raw, &d); err != nil {
-			return err
-		}
-
-		return h(d)
-	}
-}
+type CallbackHandler = events.Handler[CallbackPayload]

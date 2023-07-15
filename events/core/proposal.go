@@ -1,8 +1,6 @@
 package core
 
 import (
-	"encoding/json"
-
 	"github.com/google/uuid"
 
 	"github.com/goverland-labs/platform-events/events"
@@ -48,15 +46,4 @@ type ProposalPayload struct {
 	Votes         int               `json:"votes"`
 }
 
-type ProposalHandler func(ProposalPayload) error
-
-func (h ProposalHandler) RawHandler() events.RawMessageHandler {
-	return func(raw []byte) error {
-		var d ProposalPayload
-		if err := json.Unmarshal(raw, &d); err != nil {
-			return err
-		}
-
-		return h(d)
-	}
-}
+type ProposalHandler = events.Handler[ProposalPayload]
