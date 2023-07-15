@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/nats-io/nats.go"
@@ -12,7 +13,7 @@ import (
 	"github.com/goverland-labs/platform-events/events"
 )
 
-const rateLimit = 3 * 8 * 1024 * 1024 // 3MiB TODO: Move it to options
+const rateLimit = 1 * 8 * 1024 * 1024 // 3MiB TODO: Move it to options
 
 var (
 	ErrGroupRequired = errors.New("group is required")
@@ -55,22 +56,25 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 		return nil, err
 	}
 
+	consumerName := buildConsumerName(group, subject)
+
 	var consumer *nats.ConsumerInfo
 	for c := range js.Consumers(stream.Config.Name) {
-		if c.Name == group {
+		if c.Name == consumerName {
 			consumer = c
 		}
 	}
 
 	if consumer == nil {
 		consumer, err = js.AddConsumer(stream.Config.Name, &nats.ConsumerConfig{
-			Durable:        group,
-			Name:           group,
+			Durable:        consumerName,
+			Name:           consumerName,
 			DeliverPolicy:  nats.DeliverAllPolicy,
 			AckPolicy:      nats.AckExplicitPolicy,
 			AckWait:        time.Minute,
-			DeliverSubject: group,
+			DeliverSubject: fmt.Sprintf("deliver.%s", consumerName),
 			DeliverGroup:   group,
+			FilterSubject:  subject,
 			MaxAckPending:  maxPending,
 			RateLimit:      rateLimit,
 		})
@@ -80,6 +84,7 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 	}
 
 	opts := []nats.SubOpt{
+		nats.Durable(consumerName),
 		nats.ManualAck(),
 		nats.DeliverAll(),
 		nats.Context(ctx),
@@ -123,4 +128,8 @@ func (c *Consumer) Close() error {
 	}
 
 	return nil
+}
+
+func buildConsumerName(group, subject string) string {
+	return strings.Replace(fmt.Sprintf("consumer_%s_%s", group, subject), ".", "_", -1)
 }
