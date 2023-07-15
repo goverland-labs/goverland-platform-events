@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Fixed strategy.params in core events
+
 ## [0.0.15] - 2023-07-14
 
 ### Added
