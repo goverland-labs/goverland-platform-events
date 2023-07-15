@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Disabled unsubscribing from the subject on stopping/closing connection to the jetstream
+
 ## [0.0.16] - 2023-07-15
 
 ### Fixed

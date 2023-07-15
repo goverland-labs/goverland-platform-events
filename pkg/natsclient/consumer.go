@@ -75,10 +75,6 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 }
 
 func (c *Consumer) Close() error {
-	if err := c.sub.Unsubscribe(); err != nil {
-		return fmt.Errorf("unsubscribe [%s/%s]: %w", c.subject, c.group, err)
-	}
-
 	if err := c.sub.Drain(); err != nil {
 		return fmt.Errorf("drain [%s/%s]: %w", c.subject, c.group, err)
 	}
