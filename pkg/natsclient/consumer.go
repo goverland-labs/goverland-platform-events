@@ -42,9 +42,31 @@ func NewConsumer(ctx context.Context, conn *nats.Conn, group, subject string, h 
 		return nil, err
 	}
 
-	err = getOrCreateStream(js, subject)
+	stream, err := getOrCreateStream(js, subject)
 	if err != nil {
 		return nil, err
+	}
+
+	var consumer *nats.ConsumerInfo
+	for c := range js.Consumers(stream.Config.Name) {
+		if c.Name == group {
+			consumer = c
+		}
+	}
+
+	if consumer == nil {
+		consumer, err = js.AddConsumer(stream.Config.Name, &nats.ConsumerConfig{
+			Durable:        group,
+			Name:           group,
+			DeliverPolicy:  nats.DeliverAllPolicy,
+			AckPolicy:      nats.AckExplicitPolicy,
+			AckWait:        time.Minute,
+			DeliverSubject: group,
+			DeliverGroup:   group,
+		})
+		if err != nil {
+			return nil, fmt.Errorf("unable to create consumer '%s': %w", group, err)
+		}
 	}
 
 	subscription, err := js.QueueSubscribe(subject, group, func(msg *nats.Msg) {

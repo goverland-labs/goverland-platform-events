@@ -37,7 +37,7 @@ func NewProducer(conn *nats.Conn, subject string) (*Producer, error) {
 		return nil, fmt.Errorf("prepare jet stream: %w", err)
 	}
 
-	if err = getOrCreateStream(js, subject); err != nil {
+	if _, err = getOrCreateStream(js, subject); err != nil {
 		return nil, fmt.Errorf("prepare stream: %w", err)
 	}
 

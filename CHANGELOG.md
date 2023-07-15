@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Fixed defining the consumer as durable but without deletion after draining
+
 ## [0.0.17] - 2023-07-15
 
 ### Fixed

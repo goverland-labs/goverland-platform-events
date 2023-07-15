@@ -8,18 +8,18 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
-func getOrCreateStream(js nats.JetStreamContext, subject string) error {
+func getOrCreateStream(js nats.JetStreamContext, subject string) (*nats.StreamInfo, error) {
 	streamName := buildStreamName(subject)
-	_, err := js.StreamInfo(streamName)
+	s, err := js.StreamInfo(streamName)
 	if err == nil {
-		return nil
+		return s, nil
 	}
 
 	if err != nil && !errors.Is(err, nats.ErrStreamNotFound) {
-		return fmt.Errorf("get stream info [%s]: %v", streamName, err)
+		return nil, fmt.Errorf("get stream info [%s]: %v", streamName, err)
 	}
 
-	_, err = js.AddStream(&nats.StreamConfig{
+	s, err = js.AddStream(&nats.StreamConfig{
 		Name:      streamName,
 		Subjects:  []string{subject},
 		Retention: nats.LimitsPolicy,
@@ -29,10 +29,10 @@ func getOrCreateStream(js nats.JetStreamContext, subject string) error {
 	})
 
 	if err != nil {
-		return fmt.Errorf("add stream: %w", err)
+		return nil, fmt.Errorf("add stream: %w", err)
 	}
 
-	return nil
+	return s, nil
 }
 
 func buildStreamName(subject string) string {
