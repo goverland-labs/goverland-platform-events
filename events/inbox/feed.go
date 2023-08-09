@@ -22,6 +22,7 @@ const (
 	ProposalCreated             TimelineAction = "proposal.created"
 	ProposalUpdated             TimelineAction = "proposal.updated"
 	ProposalVotingStartsSoon    TimelineAction = "proposal.voting.starts_soon"
+	ProposalVotingEndsSoon      TimelineAction = "proposal.voting.ends_soon"
 	ProposalVotingStarted       TimelineAction = "proposal.voting.started"
 	ProposalVotingQuorumReached TimelineAction = "proposal.voting.quorum_reached"
 	ProposalVotingEnded         TimelineAction = "proposal.voting.ended"

@@ -15,6 +15,7 @@ const (
 	SubjectProposalVotingEnded         = "core.proposal.voting.ended"
 	SubjectProposalVotingQuorumReached = "core.proposal.voting.quorum_reached"
 	SubjectProposalVotingStartsSoon    = "core.proposal.voting.starts_soon"
+	SubjectProposalVotingEndsSoon      = "core.proposal.voting.ends_soon"
 )
 
 type ProposalPayload struct {
