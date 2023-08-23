@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Core timeline subject with payload
+
 ## [0.1.4] - 2023-08-14
 
 ### Added
