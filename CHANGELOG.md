@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- Replace vote choice from int to json raw message due to multiple choices
+
 ## [0.1.5] - 2023-08-23
 
 ### Added
