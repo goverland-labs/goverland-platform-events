@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.8] - 2023-10-13
+
+### Added
+- Subject for deleted proposals
+
 ## [0.1.7] - 2023-09-12
 
 ### Changed

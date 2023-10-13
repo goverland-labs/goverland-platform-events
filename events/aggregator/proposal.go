@@ -7,6 +7,7 @@ import (
 const (
 	SubjectProposalCreated = "aggregator.proposal.created"
 	SubjectProposalUpdated = "aggregator.proposal.updated"
+	SubjectProposalDeleted = "aggregator.proposal.deleted"
 )
 
 type ProposalPayload struct {
