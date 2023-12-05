@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Subject for ens name resolver
+
 ## [0.1.10] - 2023-12-04
 
 ### Added
