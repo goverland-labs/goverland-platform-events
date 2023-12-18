@@ -40,6 +40,7 @@ type ProposalPayload struct {
 	ScoresTotal      float32           `json:"scores_total"`
 	ScoresUpdated    int               `json:"scores_updated"`
 	Votes            int               `json:"votes"`
+	Flagged          bool              `json:"flagged"`
 }
 
 type ProposalHandler = events.Handler[ProposalPayload]
