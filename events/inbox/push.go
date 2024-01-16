@@ -10,6 +10,7 @@ import (
 
 const (
 	SubjectPushCreated = "inbox.push.created"
+	SubjectPushClicked = "inbox.push.clicked"
 
 	PushVersionV1 = "v1"
 	PushVersionV2 = "v2"
@@ -26,4 +27,9 @@ type PushPayload struct {
 	CustomPayload json.RawMessage `json:"custom_payload,omitempty"`
 }
 
+type PushClickPayload struct {
+	ID uuid.UUID `json:"id"`
+}
+
 type PushHandler = events.Handler[PushPayload]
+type PushClickHandler = events.Handler[PushClickPayload]

@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Improve push structure
+- Subject for clicked messages
+
 ## [0.1.12] - 2023-12-20
 
 ### Added 
