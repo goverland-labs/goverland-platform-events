@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- Extend proposal entity
+
 ## [0.1.13] - 2024-01-29
 
 ### Added
