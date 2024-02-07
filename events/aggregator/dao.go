@@ -53,6 +53,7 @@ type DaoPayload struct {
 	Guidelines     string            `json:"guidelines"`
 	Template       string            `json:"template"`
 	ParentID       string            `json:"parent_id"`
+	Verified       bool              `json:"verified"`
 }
 
 type DaoHandler = events.Handler[DaoPayload]
