@@ -19,6 +19,11 @@ const (
 	GiB = MiB * 1024
 )
 
+const (
+	consumerActionAck  = "ack"
+	consumerActionNack = "nack"
+)
+
 var ErrGroupRequired = errors.New("group is required")
 
 type Consumer[T any] struct {
@@ -125,18 +130,28 @@ func NewConsumer[T any](ctx context.Context, conn *nats.Conn, group, subject str
 	}
 
 	subscription, err := js.QueueSubscribe(subject, group, func(msg *nats.Msg) {
-		err := h.RawHandler()(msg.Data)
+		var (
+			start  = time.Now()
+			action = consumerActionAck
+		)
+
+		defer func() {
+			CollectConsumerMetric(subject, action, err, time.Since(start).Seconds())
+		}()
+
+		err = h.RawHandler()(msg.Data)
 		if err != nil {
+			action = consumerActionNack
 			// todo: think about nak with delay and timeouts
 			err = msg.NakWithDelay(time.Second)
 			if err != nil {
-				log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
+				log.Error().Err(fmt.Errorf("[%s/%s] nack err: %w", group, subject, err))
 				return
 			}
 		}
 
-		if err := msg.AckSync(); err != nil {
-			log.Error().Err(fmt.Errorf("[%s/%s]nack err: %w", group, subject, err))
+		if err = msg.AckSync(); err != nil {
+			log.Error().Err(fmt.Errorf("[%s/%s] ack err: %w", group, subject, err))
 			return
 		}
 	}, subOpts...)

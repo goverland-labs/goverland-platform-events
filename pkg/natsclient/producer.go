@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/nats-io/nats.go"
 )
@@ -61,7 +62,16 @@ func (p *Producer) PublishJSON(ctx context.Context, v any) error {
 }
 
 func (p *Producer) publish(ctx context.Context, data []byte) error {
-	if _, err := p.js.Publish(p.subject, data, nats.Context(ctx)); err != nil {
+	var (
+		start = time.Now()
+		err   error
+	)
+
+	defer func() {
+		CollectPublisherMetrics(p.subject, err, time.Since(start).Seconds())
+	}()
+
+	if _, err = p.js.Publish(p.subject, data, nats.Context(ctx)); err != nil {
 		return fmt.Errorf("publish data: %w", err)
 	}
 
