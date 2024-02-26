@@ -34,7 +34,7 @@ func CollectConsumerMetric(subject, action string, err error, duration float64) 
 }
 
 func CollectPublisherMetrics(subject string, err error, duration float64) {
-	ConsumerMetrics.
+	PublisherMetrics.
 		WithLabelValues(subject, errToBoolString(err)).
 		Observe(duration)
 }
