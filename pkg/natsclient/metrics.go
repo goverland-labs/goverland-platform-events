@@ -12,6 +12,7 @@ var (
 			Subsystem: "consumer",
 			Name:      "duration_consume",
 			Help:      "Consume duration",
+			Buckets:   []float64{.005, .01, .025, .05, .075, .1, .15, .2, .25, .5, 1, 2.5, 5, 10, 15, 30},
 		},
 		[]string{"subject", "action", "error"},
 	)
@@ -22,6 +23,7 @@ var (
 			Subsystem: "publisher",
 			Name:      "duration_publish",
 			Help:      "Publish duration",
+			Buckets:   []float64{.005, .01, .025, .05, .075, .1, .15, .2, .25, .5, 1, 2.5, 5, 10, 15, 30},
 		},
 		[]string{"subject", "error"},
 	)
