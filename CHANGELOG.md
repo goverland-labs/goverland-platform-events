@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.16] - 2024-02-28
+
 ### Added
 - Consumer/publisher metrics
 
