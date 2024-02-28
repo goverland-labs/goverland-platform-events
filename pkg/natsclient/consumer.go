@@ -143,11 +143,11 @@ func NewConsumer[T any](ctx context.Context, conn *nats.Conn, group, subject str
 		if err != nil {
 			action = consumerActionNack
 			// todo: think about nak with delay and timeouts
-			err = msg.NakWithDelay(time.Second)
-			if err != nil {
+			if err = msg.NakWithDelay(time.Second); err != nil {
 				log.Error().Err(fmt.Errorf("[%s/%s] nack err: %w", group, subject, err))
-				return
 			}
+
+			return
 		}
 
 		if err = msg.AckSync(); err != nil {
