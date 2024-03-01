@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/goverland-labs/platform-events/events"
+	"github.com/goverland-labs/goverland-platform-events/events"
 )
 
 const (

@@ -1,6 +1,6 @@
 package core
 
-import "github.com/goverland-labs/platform-events/events"
+import "github.com/goverland-labs/goverland-platform-events/events"
 
 const (
 	SubjectEnsResolverRequest  = "core.ens.request"

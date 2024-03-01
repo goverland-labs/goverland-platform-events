@@ -3,7 +3,7 @@ package aggregator
 import (
 	"encoding/json"
 
-	"github.com/goverland-labs/platform-events/events"
+	"github.com/goverland-labs/goverland-platform-events/events"
 )
 
 const (

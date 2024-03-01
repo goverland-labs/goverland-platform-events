@@ -2,10 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Changed
+- Changed the path name of the go module
+- Updated go version to 1.21
+- Added badges with link to the license and passed workflows
+
+### Added
+- Added LICENSE information
+- Added info for contributing
+- Added github issues templates
+- Added linter and unit-tests workflows for github actions
 
 ## [0.1.16] - 2024-02-28
 
