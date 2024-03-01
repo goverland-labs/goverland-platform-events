@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.1] - 2024-03-01
+
 ### Fixed
 - Fixed contribution rules
 - Fixed license badge in README.md
