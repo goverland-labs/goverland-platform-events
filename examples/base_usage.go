@@ -9,8 +9,8 @@ import (
 
 	"github.com/nats-io/nats.go"
 
-	"github.com/goverland-labs/platform-events/events/aggregator"
-	"github.com/goverland-labs/platform-events/pkg/natsclient"
+	"github.com/goverland-labs/goverland-platform-events/events/aggregator"
+	"github.com/goverland-labs/goverland-platform-events/pkg/natsclient"
 )
 
 func main() {

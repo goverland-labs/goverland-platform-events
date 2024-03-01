@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/goverland-labs/platform-events/events/aggregator"
+	"github.com/goverland-labs/goverland-platform-events/events/aggregator"
 )
 
 func TestUnitNewConsumer(t *testing.T) {

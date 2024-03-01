@@ -1,4 +1,4 @@
-module github.com/goverland-labs/platform-events
+module github.com/goverland-labs/goverland-platform-events
 
 go 1.20
 
