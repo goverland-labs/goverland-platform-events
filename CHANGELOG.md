@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Fixed contribution rules
+- Fixed license badge in README.md
+
 ## [0.2.0] - 2024-03-01
 
 ### Changed

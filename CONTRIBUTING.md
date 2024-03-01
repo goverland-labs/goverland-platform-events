@@ -1,87 +1,76 @@
-# Contributing to Goverland Platform Events Protocol
+# Contributing to the Goverland Platform Events Protocol
 
-**Please note:** We take Goverland's security and our users' trust very seriously.
-If you believe you have found a security issue, please responsibly  disclose
-by contacting us at security@goverland.xyz.
+**Please note:** At Goverland, we prioritize the security of our platform 
+and the trust of our users. If you believe you have discovered a security
+vulnerability, please responsibly disclose it by contacting us at security@goverland.xyz.
 
-**First:** if you're unsure or afraid of _anything_, just ask or submit the
-issue or pull request anyways. You won't be yelled at for giving it your best
-effort. The worst that can happen is that you'll be politely asked to change
-something. We appreciate any sort of contributions, and don't want a wall of
-rules to get in the way of that.
+**First and Foremost:** If you're uncertain or hesitant about anything, 
+don't hesitate to ask questions or submit your issue or pull request. 
+We welcome all contributions and appreciate your efforts. Our aim is 
+to facilitate collaboration without imposing unnecessary barriers.
 
 ## Issues
 
-This section will cover what we're looking for in terms of reporting issues.
-
-By addressing all the points we're looking for, it raises the chances we can
-quickly merge or address your contributions.
+This section outlines what we expect when reporting issues, ensuring smoother 
+and quicker resolution.
 
 ### Reporting an Issue
 
-* Make sure you test against the latest released version. It is possible we
-  already fixed the bug you're experiencing. Even better is if you can test
-  against the `master` branch, as the bugs are regularly fixed but new versions
-  are only released every few months.
+*Before reporting, test against the latest released version as the issue may 
+  have already been addressed. Testing against the `main` branch is even better,
+  as it includes the latest fixes not yet released.
 
-* Provide steps to reproduce the issue, and if possible include the expected
-  results as well as the actual results. Please provide text and/or screen shots.
+* Provide clear steps to reproduce the issue, along with expected and actual
+  results. Whenever possible, include text and/or screenshots to aid in understanding.
 
-* If you are seeing an internal error (a status code of 5xx), please be sure
-  to post relevant parts of (or the entire) log, as often these errors are
-  logged on the server but not reported to the user.
+* If the issue involves an internal error (e.g., a status code of 5xx), include 
+  relevant portions or the entire log, as such errors may not be immediately 
+  visible to users but are crucial for diagnosis.
 
-* If you experienced a panic, please create a [gist](https://gist.github.com)
-  of the *entire* generated crash log for us to look at. Double check
-  no sensitive items were in the log.
+* In case of a panic, create a [gist](https://gist.github.com) of the complete crash
+  log for our review, ensuring no sensitive information is included.
 
-* Respond as promptly as possible to any questions made by the Goverland
-  team to your issue.
+* Respond promptly to any inquiries from the Goverland team regarding your reported issue.
 
 ### Issue Lifecycle
 
-1. The issue is reported.
+1. **Report:** The issue is reported.
 
-2. The issue is verified and categorized by a Goverland collaborator.
-   Categorization is done via tags. For example, bugs are marked as "bugs".
+2. **Verification and Categorization:** A Goverland collaborator verifies and categorizes
+   the issue using appropriate tags (e.g., bugs for bug reports).
 
-3. Unless it is critical, the issue may be left for a period of time (sometimes
-   many weeks), giving outside contributors -- maybe you!? -- a chance to
-   address the issue.
+3. **Triaging and Community Engagement:** Non-critical issues may remain open for a period, 
+   allowing community contributors to address them. We value community involvement
+   in issue resolution.
 
-4. The issue is addressed in a pull request or commit. The issue will be
-   referenced in the commit message so that the code that fixes it is clearly
-   linked.
+4. **Resolution:** The issue is addressed through a pull request or commit, with clear 
+   references linking the fix to the reported issue.
 
-5. The issue is closed.
+5. **Closure:** Upon resolution, the issue is closed.
 
-6. Issues that are not reproducible and/or not gotten responses for a long time are
-   stale issues. In order to provide faster responses and better engagement with
-   the community, we strive to keep the issue tracker clean and the issue count
-   low. In this regard, our current policy is to close stale issues after 30 days.
-   Closed issues will still be indexed and available for future viewers. If users
-   feel that the issue is still relevant, we encourage reopening them.
+6. **Stale Issue Handling:** Issues that remain unresolved or unresponsive for an extended 
+   period are considered stale. To maintain an organized issue tracker, we may close stale 
+   issues after 90 days. However, users are encouraged to reopen them if the issue 
+   remains relevant.
 
 ## Pull requests
 
-When submitting a PR you should reference an existing issue. If no issue already exists,
-please create one. This can be skipped for trivial PRs like fixing typos.
+When submitting a pull request (PR), it's essential to reference an existing issue. 
+If none exists, create one. Exceptions can be made for trivial PRs like typo fixes.
 
-Creating an issue in advance of working on the PR can help to avoid duplication of effort,
-e.g. maybe we know of existing related work. Or it may be that we can provide guidance
-that will help with your approach.
+Creating an issue beforehand can prevent duplication of effort and allow for guidance 
+or insights from the community.
 
-Your pull request should have a description of what it accomplishes, how it does so,
-and why you chose the approach you did. PRs should include unit tests that validate
-correctness and the existing tests must pass. Follow-up work to fix tests
-does not need a fresh issue filed.
+Your PR should include a description of its purpose, implementation approach, and 
+justification for the chosen approach. Additionally, include unit tests to validate 
+correctness, ensuring existing tests pass. Corrections to tests do not require 
+a new issue.
 
-Someone will do a first pass review on your PR making sure it follows the guidelines
-in this document.  If it doesn't we'll mark the PR incomplete and ask you to follow
-up on the missing requirements.
+PRs undergo initial review to ensure compliance with guidelines outlined in this document. 
+Incomplete PRs will be marked for follow-up to address missing requirements.
 
 ### Changelog Entries
 
-Please include changes from your PR to CHANGELOG.md in the Unreleased section.
-There are many examples under [changelog](CHANGELOG.md), but the general 
-format is [keepachangelog.com](https://keepachangelog.com/en/1.1.0/)
+Include changes from your PR in the CHANGELOG.md under the Unreleased section.
+Refer to existing entries or [keepachangelog.com](https://keepachangelog.com/en/1.1.0/) 
+for formatting examples.
