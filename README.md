@@ -4,3 +4,10 @@
 ![unit-tests](https://github.com/goverland-labs/goverland-platform-events/workflows/unit-tests/badge.svg)
 ![golangci-lint](https://github.com/goverland-labs/goverland-platform-events/workflows/golangci-lint/badge.svg)
 
+## Contribution Rules
+
+[CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Changelog
+
+[CHANGELOG.md](CHANGELOG.md)
