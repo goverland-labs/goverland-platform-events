@@ -25,7 +25,7 @@ quickly merge or address your contributions.
   are only released every few months.
 
 * Provide steps to reproduce the issue, and if possible include the expected
-  results as well as the actual results. Please provide text, not screen shots!
+  results as well as the actual results. Please provide text and/or screen shots.
 
 * If you are seeing an internal error (a status code of 5xx), please be sure
   to post relevant parts of (or the entire) log, as often these errors are
