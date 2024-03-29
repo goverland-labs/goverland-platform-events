@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Inbox system events 
+
 ## [0.2.1] - 2024-03-01
 
 ### Fixed
