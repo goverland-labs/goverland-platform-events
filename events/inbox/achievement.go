@@ -7,6 +7,7 @@ import (
 )
 
 const (
+	SubjectInitAchievement        = "inbox.achievement.init"
 	SubjectRecalculateAchievement = "inbox.achievement.recalculate"
 )
 
@@ -16,6 +17,12 @@ const (
 	AchievementTypeAppInfo      AchievementType = "app_info"
 	AchievementTypeVoteVerified AchievementType = "vote_verified"
 )
+
+type AchievementInitEvent struct {
+	UserID uuid.UUID `json:"user_id"`
+}
+
+type AchievementInitHandler = events.Handler[AchievementInitEvent]
 
 type AchievementRecalculateEvent struct {
 	UserID uuid.UUID       `json:"user_id"`
