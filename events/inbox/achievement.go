@@ -14,8 +14,8 @@ const (
 type AchievementType string
 
 const (
-	AchievementTypeAppInfo      AchievementType = "app_info"
-	AchievementTypeVoteVerified AchievementType = "vote_verified"
+	AchievementTypeAppInfo AchievementType = "app_info"
+	AchievementTypeVote    AchievementType = "vote"
 )
 
 type AchievementInitEvent struct {
