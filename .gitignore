@@ -2,3 +2,4 @@
 vendor
 ./examples/generate_*
 /cmd.local
+/tmp
