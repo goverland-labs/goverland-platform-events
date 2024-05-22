@@ -5,7 +5,9 @@ import (
 )
 
 const (
-	SubjectMessageCreated   = "ipfs.message.created"
+	// when we received a new message that contains ipfs identifier
+	SubjectMessageCreated = "ipfs.message.created"
+	// ipfs checker will be publish events to this subject after resolving data by ipfs identifier
 	SubjectMessageCollected = "ipfs.message.collected"
 )
 
