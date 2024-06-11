@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Ipfs fetcher subjects
+
 ## [0.2.2] - 2024-04-11
 
 ### Added
