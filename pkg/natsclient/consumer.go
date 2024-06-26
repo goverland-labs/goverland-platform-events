@@ -46,6 +46,12 @@ func WithMaxAckPending(count int) ConsumerOpt {
 	}
 }
 
+func WithMaxDeliver(count int) ConsumerOpt {
+	return func(cfg *nats.ConsumerConfig) {
+		cfg.MaxDeliver = count
+	}
+}
+
 func WithAckWait(wait time.Duration) ConsumerOpt {
 	return func(cfg *nats.ConsumerConfig) {
 		cfg.AckWait = wait

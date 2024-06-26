@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Added consumer max deliver settings
+
 ## [0.2.3] - 2024-06-11
 
 ### Added
