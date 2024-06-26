@@ -128,6 +128,7 @@ func NewConsumer[T any](ctx context.Context, conn *nats.Conn, group, subject str
 		nats.ManualAck(),
 		nats.DeliverAll(),
 		nats.Context(ctx),
+		nats.MaxDeliver(cfg.MaxDeliver),
 		nats.AckWait(cfg.AckWait),
 	}
 
