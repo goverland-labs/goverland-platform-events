@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Inbox vote created subject
+
 ## [0.2.5] - 2024-06-26
 
 ### Added
