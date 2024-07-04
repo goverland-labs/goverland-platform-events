@@ -13,7 +13,8 @@ import (
 )
 
 const (
-	SubjectFeedUpdated = "inbox.feed.updated"
+	SubjectFeedUpdated         = "inbox.feed.updated"
+	SubjectFeedSettingsUpdated = "inbox.feed.settings.updated"
 )
 
 const (
@@ -57,6 +58,11 @@ type FeedPayload struct {
 	Timeline []TimelineItem  `json:"timeline"`
 }
 
+type FeedSettingsPayload struct {
+	SubscriberID         uuid.UUID `json:"subscriber_id"`
+	AutoarchiveAfterDays int       `json:"autoarchive_after_days"`
+}
+
 // todo: refactor it
 
 func (f *FeedPayload) GetDAO() (*core.DaoPayload, error) {
@@ -90,3 +96,4 @@ func (f *FeedPayload) GetProposal() (*core.ProposalPayload, error) {
 }
 
 type FeedHandler = events.Handler[FeedPayload]
+type FeedSettingsHandler = events.Handler[FeedSettingsPayload]
