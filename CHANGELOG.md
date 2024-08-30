@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Describe subject for delegates events
+
 ## [0.2.7] - 2024-07-05
 
 ### Added
