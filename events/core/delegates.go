@@ -24,6 +24,7 @@ type DelegatePayload struct {
 	ExpiredAt       int64  `json:"expired_at"`
 	Weight          int    `json:"weight"`
 	BlockNumber     int    `json:"block_number"`
+	BlockTimestamp  int    `json:"block_timestamp"`
 }
 
 type DelegateHandler = events.Handler[DelegatePayload]
