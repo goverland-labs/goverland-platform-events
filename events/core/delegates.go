@@ -25,14 +25,13 @@ type Delegations struct {
 }
 
 type DelegatePayload struct {
-	Action          string `json:"action"`
-	AddressFrom     string `json:"address_from"`
-	OriginalSpaceID string `json:"original_space_id"`
-	ChainID         string `json:"chain_id"`
-	BlockNumber     int    `json:"block_number"`
-	BlockTimestamp  int    `json:"block_timestamp"`
-	// Available for "set" action only
-	Delegations Delegations `json:"delegations"`
+	Action          string      `json:"action"`
+	AddressFrom     string      `json:"address_from"`
+	OriginalSpaceID string      `json:"original_space_id"`
+	ChainID         string      `json:"chain_id"`
+	BlockNumber     int         `json:"block_number"`
+	BlockTimestamp  int         `json:"block_timestamp"`
+	Delegations     Delegations `json:"delegations"`
 }
 
 type DelegateHandler = events.Handler[DelegatePayload]
