@@ -12,19 +12,26 @@ const (
 	DelegateActionSet    = "set"
 	DelegateActionClear  = "clear"
 	DelegateActionExpire = "expire"
-	DelegateActionOpt    = "opt"
 )
 
+type DelegationDetails struct {
+	Address string `json:"address"`
+	Weight  int    `json:"weight"`
+}
+
+type Delegations struct {
+	Details    []DelegationDetails `json:"details"`
+	Expiration int                 `json:"expiration"`
+}
+
 type DelegatePayload struct {
-	Action          string `json:"action"`
-	AddressFrom     string `json:"address_from"`
-	AddressTo       string `json:"address_to"`
-	ChainID         string `json:"chain_id"`
-	OriginalSpaceID string `json:"original_space_id"`
-	ExpiredAt       int64  `json:"expired_at"`
-	Weight          int    `json:"weight"`
-	BlockNumber     int    `json:"block_number"`
-	BlockTimestamp  int    `json:"block_timestamp"`
+	Action          string      `json:"action"`
+	AddressFrom     string      `json:"address_from"`
+	OriginalSpaceID string      `json:"original_space_id"`
+	ChainID         string      `json:"chain_id"`
+	BlockNumber     int         `json:"block_number"`
+	BlockTimestamp  int         `json:"block_timestamp"`
+	Delegations     Delegations `json:"delegations"`
 }
 
 type DelegateHandler = events.Handler[DelegatePayload]
