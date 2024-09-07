@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Describe the internal skeleton of the delegate event
+
 ## [0.3.3] - 2024-09-07
 
 ### Fixed
