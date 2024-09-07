@@ -1,11 +1,11 @@
-package core
+package aggregator
 
 import (
 	"github.com/goverland-labs/goverland-platform-events/events"
 )
 
 const (
-	SubjectDelegateUpsert = "core.delegate.upsert"
+	SubjectDelegateUpsert = "aggregator.delegate.updated"
 )
 
 const (

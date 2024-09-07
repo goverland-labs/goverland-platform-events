@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.3] - 2024-09-07
+
+### Fixed
+- Move delegates events to the aggregator namespace
+
 ## [0.3.2] - 2024-09-07
 
 ### Fixed
