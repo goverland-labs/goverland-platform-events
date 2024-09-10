@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.5] - 2024-09-10
+
 ### Added
 - Describe inbox feed type
 
