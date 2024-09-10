@@ -27,9 +27,11 @@ const (
 	ProposalVotingStarted       TimelineAction = "proposal.voting.started"
 	ProposalVotingQuorumReached TimelineAction = "proposal.voting.quorum_reached"
 	ProposalVotingEnded         TimelineAction = "proposal.voting.ended"
+	DelegateCreateProposal      TimelineAction = "delegate.proposal.created"
 
 	TypeDao      Type = "dao"
 	TypeProposal Type = "proposal"
+	TypeDelegate Type = "delegate"
 )
 
 var (
