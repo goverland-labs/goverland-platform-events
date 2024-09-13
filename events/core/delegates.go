@@ -8,6 +8,8 @@ import (
 
 const (
 	SubjectDelegateCreateProposal = "core.delegates.create_proposal"
+	SubjectDelegateVotingVoted    = "core.delegates.voting.voted"
+	SubjectDelegateVotingSkipVote = "core.delegates.voting.skip_vote"
 )
 
 type DelegatePayload struct {
