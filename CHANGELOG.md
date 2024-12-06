@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.8] - 2024-12-06
+
+### Added
+- Delegate created subject
+
 ## [0.3.7] - 2024-10-25
 
 ### Added
