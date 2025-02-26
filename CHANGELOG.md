@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Added fields to core DAO entity
+
 ## [0.3.9] - 2025-03-11
 
 ### Added

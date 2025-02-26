@@ -1,6 +1,8 @@
 package core
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 
 	"github.com/goverland-labs/goverland-platform-events/events"
@@ -27,6 +29,7 @@ type VotingPayload struct {
 
 type DaoPayload struct {
 	ID              uuid.UUID         `json:"id"`
+	CreatedAt       time.Time         `json:"created_at"`
 	Alias           string            `json:"alias"`
 	Name            string            `json:"name"`
 	Private         bool              `json:"private"`
@@ -57,6 +60,7 @@ type DaoPayload struct {
 	ParentID        *uuid.UUID        `json:"parent_id,omitempty"`
 	ActiveSince     *int              `json:"active_since,omitempty"`
 	PopularityIndex *float64          `json:"popularity_index,omitempty"`
+	Verified        bool              `json:"verified"`
 }
 
 type DaoHandler = events.Handler[DaoPayload]
