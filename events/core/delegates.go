@@ -7,10 +7,12 @@ import (
 )
 
 const (
-	SubjectDelegateCreated        = "core.delegates.created"
-	SubjectDelegateCreateProposal = "core.delegates.create_proposal"
-	SubjectDelegateVotingVoted    = "core.delegates.voting.voted"
-	SubjectDelegateVotingSkipVote = "core.delegates.voting.skip_vote"
+	SubjectDelegateCreated                = "core.delegates.created"
+	SubjectDelegateCreateProposal         = "core.delegates.create_proposal"
+	SubjectDelegateVotingVoted            = "core.delegates.voting.voted"
+	SubjectDelegateVotingSkipVote         = "core.delegates.voting.skip_vote"
+	SubjectDelegateDelegationExpiringSoon = "core.delegates.delegation_expiring_soon"
+	SubjectDelegateDelegationExpired      = "core.delegates.delegation_expired"
 )
 
 type DelegatePayload struct {

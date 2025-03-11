@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.9] - 2025-03-11
+
+### Added
+- Delegation expiring soon subject
+- Delegate expired subject
+
 ## [0.3.8] - 2024-12-06
 
 ### Added
