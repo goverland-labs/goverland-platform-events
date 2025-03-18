@@ -1,6 +1,8 @@
 package core
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 
 	"github.com/goverland-labs/goverland-platform-events/events"
@@ -24,6 +26,8 @@ type DelegatePayload struct {
 	DaoID uuid.UUID `json:"dao_id"`
 	// ProposalID is internal proposal identifier
 	ProposalID string `json:"proposal_id"`
+	// DueDate describe expiration date for some events
+	DueDate *time.Time `json:"due_date"`
 }
 
 type DelegatesHandler = events.Handler[DelegatePayload]
