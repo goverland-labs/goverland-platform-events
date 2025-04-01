@@ -3,6 +3,7 @@ package core
 import (
 	"github.com/google/uuid"
 	"github.com/goverland-labs/goverland-platform-events/events"
+	"time"
 )
 
 const (
@@ -11,6 +12,7 @@ const (
 
 type TokenPricePayload struct {
 	DaoID uuid.UUID `json:"dao_id"`
+	Time  time.Time `json:"time"`
 	Price float64   `json:"price"`
 }
 
