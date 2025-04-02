@@ -5,9 +5,10 @@ import (
 )
 
 const (
-	SubjectProposalCreated = "aggregator.proposal.created"
-	SubjectProposalUpdated = "aggregator.proposal.updated"
-	SubjectProposalDeleted = "aggregator.proposal.deleted"
+	SubjectProposalCreated      = "aggregator.proposal.created"
+	SubjectProposalUpdated      = "aggregator.proposal.updated"
+	SubjectProposalDeleted      = "aggregator.proposal.deleted"
+	SubjectProposalVotesFetched = "aggregator.proposal.votes_fetched"
 )
 
 type ProposalPayload struct {
