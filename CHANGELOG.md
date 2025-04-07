@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.13] - 2025-04-07
+
+### Added
+- Delegation expiration actions
+
 ## [0.3.12] - 2025-04-02
 
 ### Added
