@@ -1,5 +1,10 @@
 package aggregator
 
+const (
+	SourceSnapshot  = "snapshot"
+	SourceSnapshotX = "snapshot-x"
+)
+
 type FilterPayload struct {
 	MinScore    float32 `json:"min_score"`
 	OnlyMembers bool    `json:"only_members"`
