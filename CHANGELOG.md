@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- Extend DAO and proposal models
+
 ## [0.3.14] - 2025-04-08
 
 ### Added
