@@ -1,6 +1,8 @@
 package aggregator
 
 import (
+	"encoding/json"
+
 	"github.com/goverland-labs/goverland-platform-events/events"
 )
 
@@ -42,6 +44,10 @@ type ProposalPayload struct {
 	ScoresUpdated    int               `json:"scores_updated"`
 	Votes            int               `json:"votes"`
 	Flagged          bool              `json:"flagged"`
+	// ExecutionDetails contains object with few fields: ExecutionTime, Execution, ExecutionHash, Tx, etc
+	ExecutionDetails json.RawMessage `json:"execution_details"`
+	// Source explain datasource that provided this info: snapshot, snapshot-x, etc
+	Source string `json:"source"`
 }
 
 type ProposalHandler = events.Handler[ProposalPayload]

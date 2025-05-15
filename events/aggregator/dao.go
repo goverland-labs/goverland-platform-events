@@ -31,6 +31,8 @@ type DaoPayload struct {
 	Website        string            `json:"website"`
 	Twitter        string            `json:"twitter"`
 	Github         string            `json:"github"`
+	Discord        string            `json:"discord"`
+	Farcaster      string            `json:"farcaster"`
 	Coingecko      string            `json:"coingecko"`
 	Email          string            `json:"email"`
 	Network        string            `json:"network"`
@@ -54,6 +56,8 @@ type DaoPayload struct {
 	Template       string            `json:"template"`
 	ParentID       string            `json:"parent_id"`
 	Verified       bool              `json:"verified"`
+	// Source explain datasource that provided this info: snapshot, snapshot-x, etc
+	Source string `json:"source"`
 }
 
 type DaoHandler = events.Handler[DaoPayload]
