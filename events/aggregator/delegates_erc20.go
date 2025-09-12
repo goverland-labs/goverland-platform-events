@@ -13,9 +13,9 @@ type ERC20DelegatePayload struct {
 	AddressTo      string `json:"address_to"`
 	Token          string `json:"token"`
 	Network        string `json:"network"`
-	BlockNumber    int    `json:"block_number"`
-	BlockTimestamp int    `json:"block_timestamp"`
-	VotingPower    int    `json:"voting_power"`
+	BlockNumber    int64  `json:"block_number"`
+	BlockTimestamp int64  `json:"block_timestamp"`
+	VotingPower    string `json:"voting_power"`
 }
 
 type ERC20DelegateHandler = events.Handler[ERC20DelegatePayload]
