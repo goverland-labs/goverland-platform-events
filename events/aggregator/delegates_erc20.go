@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	SubjectDelegateERC20 = "aggregator.erc20indexer.update"
+	SubjectDelegateERC20 = "aggregator.erc20indexer.updates"
 )
 
 type ERC20DelegatePayload struct {
