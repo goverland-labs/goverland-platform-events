@@ -11,6 +11,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 - ERC20 Delegates subject
+- ERC20 VP changes subject
+- ERC20 Transfers subject
 
 ## [0.3.15] - 2025-06-16
 

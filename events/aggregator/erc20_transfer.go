@@ -5,17 +5,18 @@ import (
 )
 
 const (
-	SubjectDelegateERC20 = "aggregator.erc20indexer.updates"
+	SubjectERC20Transfer = "aggregator.erc20indexer.transfers"
 )
 
-type ERC20DelegatePayload struct {
+type ERC20TransferPayload struct {
 	AddressFrom    string `json:"address_from"`
 	AddressTo      string `json:"address_to"`
 	Token          string `json:"token"`
 	Network        string `json:"network"`
 	BlockNumber    int64  `json:"block_number"`
 	BlockTimestamp int64  `json:"block_timestamp"`
-	VotingPower    string `json:"voting_power"`
+	LogIndex       int64  `json:"log_index"`
+	Amount         string `json:"amount"`
 }
 
-type ERC20DelegateHandler = events.Handler[ERC20DelegatePayload]
+type ERC20TransfersHandler = events.Handler[ERC20TransferPayload]
