@@ -16,7 +16,7 @@ type ERC20VPChangesPayload struct {
 	BlockTimestamp int64  `json:"block_timestamp"`
 	LogIndex       int64  `json:"log_index"`
 	VotingPower    string `json:"voting_power"`
-	PreviousPower  string `json:"previous_power"`
+	DeltaPower     string `json:"delta_power"`
 }
 
 type ERC20VPChangesHandler = events.Handler[ERC20VPChangesPayload]
