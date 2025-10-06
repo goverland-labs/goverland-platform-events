@@ -8,14 +8,6 @@ const (
 	SubjectERC20VPChanges = "aggregator.erc20indexer.vp_changes"
 )
 
-//    address: string;
-//    token: string;
-//    network: string;
-//    block_number: number;
-//    block_timestamp: number;
-//    voting_power: string;
-//    log_index: number;
-
 type ERC20VPChangesPayload struct {
 	Address        string `json:"address"`
 	Token          string `json:"token"`
@@ -24,6 +16,7 @@ type ERC20VPChangesPayload struct {
 	BlockTimestamp int64  `json:"block_timestamp"`
 	LogIndex       int64  `json:"log_index"`
 	VotingPower    string `json:"voting_power"`
+	PreviousPower  string `json:"previous_power"`
 }
 
 type ERC20VPChangesHandler = events.Handler[ERC20VPChangesPayload]
